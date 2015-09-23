@@ -20,7 +20,12 @@
    int columnLength;
    int size;
 }
+-(void)viewDidAppear:(BOOL)animated {
+   [self createGameView];
+   [self colorBoardStatic];
 
+
+}
 - (void)viewDidLoad {
    [super viewDidLoad];
    
@@ -44,8 +49,6 @@
    //                    @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO,
    //                    nil];
    
-   [self createGameView];
-   [self colorBoardStatic];
    
    
    
@@ -204,6 +207,7 @@
                                                        self.golBoardView.frame.size.height/columnLength - 2)];
       oneGridView.tag = tagg;
       oneGridView.alive = NO;
+      
       [self.golBoardView addSubview:oneGridView];
       
       countX += self.golBoardView.frame.size.width/rowLength;

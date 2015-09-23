@@ -18,11 +18,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdt-nA-aI6">
-                                <rect key="frame" x="20" y="42" width="560" height="340"/>
+                                <rect key="frame" x="20" y="38" width="333" height="238"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JhM-zH-YcC">
-                                <rect key="frame" x="104" y="550" width="60" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JhM-zH-YcC">
+                                <rect key="frame" x="49" y="300" width="60" height="30"/>
                                 <state key="normal" title="one step"/>
                                 <connections>
                                     <action selector="tickOnce:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oR5-PJ-v07"/>
@@ -31,13 +31,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="qdt-nA-aI6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="22" id="044-yD-TdS"/>
-                            <constraint firstItem="JhM-zH-YcC" firstAttribute="top" secondItem="qdt-nA-aI6" secondAttribute="bottom" constant="168" id="2IV-Ww-p8p"/>
-                            <constraint firstItem="qdt-nA-aI6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Btr-KK-wXN"/>
-                            <constraint firstItem="qdt-nA-aI6" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="FDF-uu-lwa"/>
-                            <constraint firstAttribute="bottom" secondItem="qdt-nA-aI6" secondAttribute="bottom" constant="218" id="FUt-Az-kZ4"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="JhM-zH-YcC" secondAttribute="trailing" constant="416" id="GlS-nh-qkj"/>
-                            <constraint firstItem="JhM-zH-YcC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="84" id="eXh-Hy-EVF"/>
+                            <constraint firstItem="qdt-nA-aI6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="18" id="bF9-6v-2Le"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qdt-nA-aI6" secondAttribute="trailing" constant="227" id="dSL-WO-hSR"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="qdt-nA-aI6" secondAttribute="leading" id="e9C-vw-ODU"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="qdt-nA-aI6" secondAttribute="bottom" constant="324" id="rCY-FX-bvP"/>
                         </constraints>
                     </view>
                     <connections>
@@ -46,7 +43,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="398" y="366"/>
+            <point key="canvasLocation" x="398" y="416"/>
         </scene>
     </scenes>
 </document>

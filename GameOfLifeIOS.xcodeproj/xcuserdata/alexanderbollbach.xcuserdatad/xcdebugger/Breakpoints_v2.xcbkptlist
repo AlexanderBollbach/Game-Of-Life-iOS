@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameOfLifeIOS/ViewController.m"
-            timestampString = "464485894.526248"
+            timestampString = "464548858.219063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "-tickGolView"
             landmarkType = "5">
          </BreakpointContent>
