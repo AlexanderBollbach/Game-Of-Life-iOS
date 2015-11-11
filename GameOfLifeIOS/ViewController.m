@@ -9,48 +9,61 @@
 #import "ViewController.h"
 #import "GolView.h"
 @interface ViewController ()
-@property (nonatomic,strong) IBOutlet UIView *golBoardView;
+@property (nonatomic,strong) UIView *golBoardView;
 @property(nonatomic,strong)NSTimer *timer;
 //@property (nonatomic,strong) NSMutableArray *golArray;
 
 @end
 
 @implementation ViewController {
-   int rowLength;
-   int columnLength;
-   int size;
+   float rowLength;
+   float columnLength;
+   float size;
 }
 -(void)viewDidAppear:(BOOL)animated {
    [self createGameView];
-   [self colorBoardStatic];
+  // [self colorBoardStatic];
 
 
 }
+
+- (void)runButton:(UIButton*)sender {
+   sender.selected = !sender.selected;
+ 
+   if (sender.selected) {
+   self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+   } else {
+      [self.timer invalidate];
+   }
+   
+}
+
+- (void)tick {
+   [self tickGolView];
+}
+
 - (void)viewDidLoad {
    [super viewDidLoad];
    
-   size = 256;
-   rowLength = 16;
-   columnLength = 16;
+   self.golBoardView = [[UIView alloc] initWithFrame:CGRectInset(self.view.bounds, 50, 150)];
+   self.golBoardView.backgroundColor = [UIColor clearColor];
+   [self.golBoardView clipsToBounds];
+   [self.view addSubview:self.golBoardView];
+   
+   UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+   button.frame = CGRectMake(self.golBoardView.frame.origin.x, self.golBoardView.frame.size.height + self.golBoardView.frame.origin.y, 150, 50);
+   [button setTitle:@"run" forState:UIControlStateNormal];
+   [button setTitle:@"stop" forState:UIControlStateSelected];
+   [button addTarget:self action:@selector(runButton:) forControlEvents:UIControlEventTouchUpInside];
+   [self.view addSubview:button];
    
    
-   // self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(tickGameView) userInfo:nil repeats:YES];
-   //   [[NSRunLoop mainRunLoop]addTimer:self.timer forMode:UITrackingRunLoopMode];
+   float sizeCons = 64;
    
-   
-   // self.golArray = [NSMutableArray arrayWithObjects:
-   //                    @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO,
-   //                    @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO,
-   //                    @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO,
-   //                    @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO,
-   //                    @NO, @NO, @NO, @YES, @NO, @NO, @NO, @NO,
-   //                    @NO, @NO, @NO, @YES, @YES, @NO, @NO, @NO,
-   //                    @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO,
-   //                    @NO, @NO, @NO, @NO, @NO, @NO, @NO, @NO,
-   //                    nil];
-   
-   
-   
+   size = 2 * sizeCons;
+   rowLength = 1 * sizeCons;
+   columnLength = 1 * sizeCons;
+
    
    
    
@@ -60,22 +73,6 @@
 }
 
 
-//-(void)colorBoard {
-//   int counter = 0;
-//   for (UIView* view in self.golView.subviews) {
-//      if ([[self.golArray objectAtIndex:counter] boolValue]) {
-//         view.backgroundColor = [UIColor darkGrayColor]; // ON
-//      } else {
-//         view.backgroundColor = [UIColor lightGrayColor]; // OFF
-//      }
-//      counter++;
-//   }
-//}
-
-
-- (IBAction)tickOnce:(UIButton *)sender {
-   [self tickGolView];
-}
 
 -(void)tickGolView {
    
@@ -183,11 +180,11 @@
    
    for (GolView* view in killArray) {
       view.alive = NO;
-      view.backgroundColor = [UIColor lightGrayColor];
+     // view.backgroundColor = [UIColor lightGrayColor];
    }
    for (GolView* view in resurrectArray) {
       view.alive = YES;
-      view.backgroundColor = [UIColor darkGrayColor];
+   //   view.backgroundColor = [UIColor darkGrayColor];
    }
   // [self colorBoardStatic];
 }
@@ -195,26 +192,27 @@
 
 -(void)createGameView {
    
-   int countX = 0;
-   int countY = 0;
+   float countX = 0;
+   float countY = 0;
    int tagg = 1;
    
-   for (int x = 1; x < size+1; x++) {
-      GolView* oneGridView = [[GolView alloc]
-                              initWithFrame:CGRectMake(countX,
-                                                       countY,
-                                                       self.golBoardView.frame.size.width/rowLength - 2,
-                                                       self.golBoardView.frame.size.height/columnLength - 2)];
+   for (int x = 1; x == size; x++) {
+      
+      GolView* oneGridView = [[GolView alloc]initWithFrame:CGRectMake(countX,
+                                                                      countY,
+                                                                      self.golBoardView.bounds.size.width/rowLength - 2,
+                                                                      self.golBoardView.bounds.size.height/columnLength - 2)];
       oneGridView.tag = tagg;
       oneGridView.alive = NO;
       
       [self.golBoardView addSubview:oneGridView];
       
-      countX += self.golBoardView.frame.size.width/rowLength;
+      countX += self.golBoardView.bounds.size.width/rowLength;
       
-      if (x % rowLength == 0) {
+      int moduleRL = rowLength;
+      if (x % moduleRL == 0) {
          countX = 0;
-         countY += self.golBoardView.frame.size.height/columnLength;
+         countY += self.golBoardView.bounds.size.height/columnLength;
       }
       
       tagg++;
@@ -232,20 +230,20 @@
       GolView* golView = (GolView*)touch.view;
       golView.alive = !golView.alive;
    }
-   [self colorBoardStatic];
+ //  [self colorBoardStatic];
 }
 
 
--(void)colorBoardStatic {
-   int counter = 0;
-   for (GolView* view in self.golBoardView.subviews) {
-      if (view.alive) {
-         view.backgroundColor = [UIColor darkGrayColor]; // ON
-      } else {
-         view.backgroundColor = [UIColor lightGrayColor]; // OFF
-      }
-      counter++;
-   }
-}
+//-(void)colorBoardStatic {
+//   int counter = 0;
+//   for (GolView* view in self.golBoardView.subviews) {
+//      if (view.alive) {
+//         view.backgroundColor = [UIColor darkGrayColor]; // ON
+//      } else {
+//         view.backgroundColor = [UIColor lightGrayColor]; // OFF
+//      }
+//      counter++;
+//   }
+//}
 
 @end
